@@ -6,10 +6,6 @@ plugins {
 group = "com.samuelminana.tema4gradle"
 version = "1.0-SNAPSHOT"
 
-application {
-    mainClass = "com.samuelminana.tema4gradle.Main"
-}
-
 
 java {
     toolchain {
@@ -29,6 +25,26 @@ dependencies {
     implementation(platform("dev.langchain4j:langchain4j-bom:1.10.0"))
     implementation("dev.langchain4j:langchain4j-open-ai")
 
+}
+
+application {
+    mainClass = "com.samuelminana.tema4gradle.Main"
+}
+
+tasks.register<Exec>("ollamaVersion") {
+    commandLine("bash", "-lc", "ollama --version")
+}
+
+tasks.register<Exec>("ollamaPs") {
+    commandLine("bash", "-lc", "ollama ps")
+}
+
+tasks.register("llmInfo") {
+    dependsOn("ollamaVersion", "ollamaPs")
+
+    doLast {
+        println("Demo finalizada")
+    }
 }
 
 tasks.test {
