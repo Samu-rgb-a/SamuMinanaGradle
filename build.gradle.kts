@@ -1,9 +1,15 @@
 plugins {
     id("java")
+    id("application")
 }
 
 group = "com.samuelminana.tema4gradle"
 version = "1.0-SNAPSHOT"
+
+application {
+    mainClass = "com.samuelminana.tema4gradle.Main"
+}
+
 
 java {
     toolchain {
